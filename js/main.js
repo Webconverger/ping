@@ -1,7 +1,8 @@
-google.load("visualization", "1", {packages:["corechart"]});
+google.load("visualization", "1", {
+	packages: ["corechart"]
+});
 google.setOnLoadCallback(drawChart);
 function drawChart() {
-
 
 	function downloadUrl(url, callback) {
 		var request = window.ActiveXObject ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();
@@ -14,33 +15,33 @@ function drawChart() {
 		request.send(null);
 	}
 
-
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Month');
 	downloadUrl("header.json", header);
 
-	function header(arraystring){
+	function header(arraystring) {
 		arr = JSON.parse(arraystring);
-		for(var i=0; i<arr.length; i++) { 
+		for (var i = 0; i < arr.length; i++) {
 			console.log(arr[i]);
 			data.addColumn('number', arr[i]);
 		}
 
-	downloadUrl("total.json", rows);
-}
+		downloadUrl("total.json", rows);
+	}
 
-	function rows(rowstring){
+	function rows(rowstring) {
 
-	console.log(rowstring);
-	data.addRows(JSON.parse(rowstring));
+		console.log(rowstring);
+		data.addRows(JSON.parse(rowstring));
 
-	var options = {
-width: window.innerWidth, height: window.innerHeight,
-	   title: 'Webconverger usage'
-	};
+		var options = {
+			width: window.innerWidth,
+			height: window.innerHeight,
+			title: 'Webconverger usage'
+		};
 
-	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-	chart.draw(data, options);
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
 
 	}
 }
