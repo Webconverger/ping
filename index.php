@@ -1,16 +1,14 @@
 <?php
 
-// Expecting a md5 hash
-if (empty($_POST["M"]) || !ctype_alnum($_POST["M"]) || (strlen($_POST["M"]) != 32)) {
+// Expecting a md5 hash and a version
+if (empty($_POST["M"]) || empty($_POST["V"]) ) {
 	include("chart.html");
 	die();
 }
 
-// Assuming version numbers won't be longer than four characters
-if (empty($_POST["V"]) || (strlen($_POST["V"])) > 4) {
-	include("chart.html");
-	die();
-}
+$fp = fopen('debug.log', 'a');
+fwrite($fp, $_SERVER["REMOTE_ADDR"] . ": " . $_POST["V"] . " hmac ". $_POST["M"] . "\n");
+fclose($fp);
 
 date_default_timezone_set('Europe/London');
 $dir = getcwd();

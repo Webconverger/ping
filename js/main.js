@@ -20,6 +20,7 @@ function drawChart() {
 	downloadUrl("header.json", header);
 
 	function header(arraystring) {
+		console.log(arraystring);
 		arr = JSON.parse(arraystring);
 		for (var i = 0; i < arr.length; i++) {
 			console.log(arr[i]);
