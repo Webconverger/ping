@@ -2,3 +2,7 @@ RewriteEngine On
 RewriteRule ^(.*/)?\.git+ - [F,L]
 ErrorDocument 403 "Access Forbidden"
 RewriteRule ^tip$ /uptodate.cgi               [L,QSA]
+
+<files debug.log>
+deny from all
+</files>
