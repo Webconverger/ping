@@ -12,7 +12,7 @@ Content-Type: text/html
 <h1 id="digit">
 END
 sha=$(git ls-remote git://github.com/Webconverger/webc.git refs/heads/master)
-grep ${sha:0:6} debug.log | awk '{print $4}' | sort | uniq | wc -l
+grep ${sha:0:6} debug.log | awk '{print $5}' | sort | uniq | wc -l
 cat <<END
 </h1>
 

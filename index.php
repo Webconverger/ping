@@ -7,7 +7,7 @@ if (empty($_POST["M"]) || empty($_POST["V"]) ) {
 }
 
 $fp = fopen('debug.log', 'a');
-fwrite($fp, $_SERVER["REMOTE_ADDR"] . ": " . $_POST["V"] . " hmac ". $_POST["M"] . " dev " . $_POST["D"] .  "\n");
+fwrite($fp, date("c") . " " . $_SERVER["REMOTE_ADDR"] . " " . $_POST["V"] . " hmac ". $_POST["M"] . " dev " . $_POST["D"] .  "\n");
 fclose($fp);
 
 date_default_timezone_set('Europe/London');
