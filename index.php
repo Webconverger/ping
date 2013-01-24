@@ -6,20 +6,26 @@ if (empty($_POST["M"]) || empty($_POST["V"]) ) {
 	die();
 }
 
+date_default_timezone_set('Europe/London');
+
+$m = gethostbyaddr($_SERVER['REMOTE_ADDR']) . " " . $_POST["D"] . " " . $_SERVER["GEOIP_COUNTRY_CODE"] . " " . $_POST["V"];
+
 $fp = fopen('debug.log', 'a');
-fwrite($fp, date("c") . " " . gethostbyaddr($_SERVER['REMOTE_ADDR']) . " " . $_POST["V"] . " " . $_SERVER["GEOIP_COUNTRY_CODE"] . " " . $_POST["M"] . " " . $_POST["D"] .  "\n");
+fwrite($fp, date("c") . " " . $m . " " . $_POST["M"] . "\n");
 fclose($fp);
 
-date_default_timezone_set('Europe/London');
 $dir = getcwd();
 if (is_writable($dir)) {
 	$dir = $dir . '/' . date("Y-m");
+	touch($dir);
+	$dir = $dir . '/' . date("z");
 } else {
 	die("No write permission.\n Fix with: chown -R www-data $dir");
 }
-@mkdir($dir, 0777);
+@mkdir($dir, 0777, true);
 
 $handle = fopen($dir . '/' . $_POST["M"], "a");
-fwrite($handle, $_POST["V"] . "\n");
+fwrite($handle, date("U") . " " . $m  . "\n");
 fclose($handle);
+
 ?>
