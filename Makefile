@@ -5,13 +5,10 @@ all:    $(ALL_OBJS) total.json
 
 %.txt: %/
 	@echo Processing $^
-	@find $^ -type f -exec tail -n1 {} \; | awk '{print $$NF}' | sort | uniq -c > $@
+	@find $^ -type f | tr -s './' ' ' | awk '{print $$NF}' | sort -u | wc -l > $@
 	@sed -i 's,^ *,,' $@
 
-header.txt: $(ALL_OBJS)
-	./header.sh
-
-total.json: header.txt $(ALL_OBJS)
+total.json: $(ALL_OBJS)
 	./total.sh > total.json
 
 clean:

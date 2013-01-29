@@ -2,13 +2,6 @@ tmp=$(mktemp)
 for i in `ls 20*.txt | sort`
 do
 	month=\[\"$(basename $i .txt)\"
-	s=""
-	for v in `cat header.txt`
-	do
-		n=$(awk "\$2 ~ /^$v$/{print \$1}" $i)
-		test "$n" || n="null"
-		s="$s,$n"
-	done
 	echo ${month}${s},$(awk '{ sum+=$1} END {print sum}' $i)\] >> $tmp
 done
 echo -n "["
