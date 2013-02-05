@@ -14,14 +14,10 @@ $fp = fopen('debug.log', 'a');
 fwrite($fp, date("c") . " " . $m . " " . $_POST["M"] . "\n");
 fclose($fp);
 
-$dir = getcwd();
-if (is_writable($dir)) {
-	$dir = $dir . '/' . date("Y-m");
-	touch($dir);
-	$dir = $dir . '/' . date("z");
-} else {
-	die("No write permission.\n Fix with: chown -R www-data $dir");
-}
+$dir = ".";
+$dir = $dir . '/' . date("Y-m");
+$dir = $dir . '/' . date("z");
+echo ($dir);
 @mkdir($dir, 0777, true);
 
 $handle = fopen($dir . '/' . $_POST["M"], "a");
