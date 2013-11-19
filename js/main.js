@@ -38,7 +38,7 @@ function drawChart() {
 		var options = {
 			width: window.innerWidth,
 			height: window.innerHeight,
-			title: 'Webconverger usage'
+			title: 'Webconverger machine pings'
 		};
 
 		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
