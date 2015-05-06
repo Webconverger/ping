@@ -6,3 +6,5 @@ RewriteRule ^tip$ /uptodate.cgi               [L,QSA]
 <files debug.log>
 deny from all
 </files>
+
+Options -Indexes +ExecCGI
